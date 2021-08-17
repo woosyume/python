@@ -56,3 +56,112 @@ drinks = ['coffee', 'smoothie', 'tea']
 
 for day, fruit, drink in zip(days, fruits, drinks):
     print(day, fruit, drink)
+
+# Dict to for loop ... Dict = tuple with list [(), ()]
+d = {'x': 100, 'y': 200}
+for v in d.items():
+    print(v)
+
+for k, v in d.items():
+    print(k, v)
+
+# Define method
+def say_something():
+    print('Hi')
+
+say_something()
+print(type(say_something)) # <class 'function'>
+
+def return_something():
+    return 'Hi'
+
+result = return_something()
+print(result)
+
+## With parameter
+def what_is_this(color):
+    print(color)
+
+what_is_this('red')
+
+# 이런 식의 書き方も可能
+def add_num(a: int, b: int) -> int:
+    return a + b
+
+r = add_num(1, 2)
+print(r)
+
+def menu(entree, drink, dessert):
+    print(entree, drink, dessert)
+
+menu('beef', 'beer', 'ice')
+# 파라미터에 키워드도 지정 가능
+menu(entree='beef', drink='beer', dessert='ice')
+
+## Default parameter
+def team(name='barcelona', captain='messi'):
+    print(name, captain)
+team() # barcelona messi
+team(name='psg') # psg messi
+
+def test_func(x, l=[]):
+    l.append(x)
+    return l
+# y = [1, 2, 3]
+# r = test_func(100, y)
+# print(r)
+
+# 그런데 리스트는 디폴트 파라미터로 넘겨선 안된다는 암묵적인 룰이 있다.
+r = test_func(100)
+print(r) # [100]
+r = test_func(100)
+print(r) # [100, 100]
+
+# 'l'은 함수 선언할 때 한번만 만들어지고 그 뒤엔 동일한 것을 참조하게 된다. バグに繋がりやすい
+
+def test_func(x, l=None):
+    if l is None: # 이런 식으로 None으로 설정해둔 후에 都度都度初期化
+        l = []
+    l.append(x)
+    return l
+r = test_func(100)
+print(r) # [100]
+r = test_func(100)
+print(r) # [100]
+
+# Make tuple with parameter (*args)
+def say_something(*args):
+    for arg in args:
+        print(arg)
+say_something('hi', 'woosyume')
+
+def say_something(particular, *args):
+    print(particular)
+    for arg in args:
+        print(arg)
+say_something('Hi', 'Woosyume', 'Hoho') # 위치를 알아서 찾아가나보다. line143에 비해 많이 사용된다.
+t = ('Woosyume', 'Rakuten')
+say_something('Wow!', *t)
+
+# Make dict with keyword parameter (**kwargs)
+def menu(**kwargs):
+    # print(entree, drink)
+    for k, v in kwargs.items():
+        print(k, v)
+menu(entree='burger', drink='coke')
+
+d = {
+    'entree': 'beef',
+    'drink': 'coffee'
+}
+menu(**d) # 이 형태 많이 쓰인다.
+
+def menu(food, *args, **kwargs):
+    print(food)
+    print(args)
+    print(kwargs)
+
+menu('banana', 'apple', 'orange', entree='beef', drink='coke')
+# banana
+# ('apple', 'orange')
+# {'entree': 'beef', 'drink': 'coke'}
