@@ -56,6 +56,9 @@ drinks = ['coffee', 'smoothie', 'tea']
 
 for day, fruit, drink in zip(days, fruits, drinks):
     print(day, fruit, drink)
+    # Mon apple coffee
+    # Tue banana smoothie
+    # Wed mango tea
 
 # Dict to for loop ... Dict = tuple with list [(), ()]
 d = {'x': 100, 'y': 200}
