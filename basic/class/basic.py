@@ -20,12 +20,47 @@ person = Person('Woosyume')
 person.say_something()
 
 # Extension
+class Person(object):
+    def __init__(self, age=1) -> None:
+        self.age = age
+
+    def drive(self):
+        if self.age >= 18:
+            print('Drive ok')
+        else:
+            raise Exception('No Driver License')
+
+class Baby(Person):
+    def __init__(self, age=1) -> None:
+        if age < 18:
+            super().__init__(age)
+        else:
+            raise ValueError
+
+class Adult(Person):
+    def __init__(self, age=18) -> None:
+        if age >= 18:
+            super().__init__(age)
+        else:
+            raise ValueError
+
+baby = Baby()
+adult = Adult()
+
 class Car(object):
     def __init__(self, model=None):
         self.model = model
 
     def run(self):
         print('run')
+
+    def ride(self, person):
+        person.drive()
+
+car = Car()
+# car.ride(baby)
+car.ride(adult)
+
 
 class ToyotaCar(Car):
     def run(self):
@@ -77,3 +112,12 @@ print(tesla_car.enable_auto_run)
 # __enable_auto_run 인 경우에는 클래스 내부에서만 접근 가능.
 # tesla_car.enable_auto_run = True ... AttributeError: can't set attribute
 # print(tesla_car.enable_auto_run)
+
+class T(object):
+    pass
+
+# 이런 식으로 값을 세팅하는 일은 거의 없다고 한다.
+t = T()
+t.name = 'woosyume'
+t.age = 20
+print(t.name)
