@@ -12,5 +12,9 @@ class Person(object):
 
     def run(self):
         print('run')
+
+    # Object가 더 이상 사용되지 않을 때 실행됨. Deconstructor
+    def __del__(self):
+        print('good bye')
 person = Person('Woosyume')
 person.say_something()
