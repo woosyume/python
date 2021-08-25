@@ -19,11 +19,17 @@ class Person(object):
 person = Person('Woosyume')
 person.say_something()
 
+import abc
+
 # Extension
-class Person(object):
+
+## metaclass=abc.ABCMeta -> 추상클래스 세팅. 그런데 자바에 있으니까 추가된 것일 뿐 굳이 이것에 의존할 필요는 없다.
+class Person(metaclass=abc.ABCMeta):
     def __init__(self, age=1) -> None:
         self.age = age
 
+    # 추상메소드로서 이것을 자식들이 반드시 만들도록 강제
+    @abc.abstractmethod
     def drive(self):
         if self.age >= 18:
             print('Drive ok')
@@ -36,6 +42,9 @@ class Baby(Person):
             super().__init__(age)
         else:
             raise ValueError
+    
+    def drive(self):
+        pass
 
 class Adult(Person):
     def __init__(self, age=18) -> None:
@@ -43,6 +52,9 @@ class Adult(Person):
             super().__init__(age)
         else:
             raise ValueError
+
+    def drive(self):
+        pass
 
 baby = Baby()
 adult = Adult()
